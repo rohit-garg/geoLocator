@@ -9,8 +9,8 @@ var geoLocator = {
         if (!force && localStorage && localStorage.getItem(geoLocator.config.localStorageKey) != null) {
             geoLocator.position = JSON.parse(localStorage.getItem(geoLocator.config.localStorageKey));
             // calling user defined success callback
-            if (typeof (geoLocator.onSuccess) == "function") {
-                geoLocator.onSuccess.apply(this, [geoLocator.position]);
+            if (typeof (onSuccess) == "function") {
+                onSuccess.apply(this, [geoLocator.position]);
             }
         }
 
@@ -55,4 +55,4 @@ geoLocator.init(function (posObj) {
     console.log(posObj);
 }, function (error) {
     console.log(error);
-}, true);
+}, false);
