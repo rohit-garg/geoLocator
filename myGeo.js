@@ -8,7 +8,10 @@ var geoLocator = {
         // if position is already stored in local storage and new geo look up is not forced
         if (!force && localStorage && localStorage.getItem(geoLocator.config.localStorageKey) != null) {
             geoLocator.position = JSON.parse(localStorage.getItem(geoLocator.config.localStorageKey));
-            onSuccess.apply(this, [geoLocator.position]);
+            // calling user defined success callback
+            if (typeof (geoLocator.onSuccess) == "function") {
+                geoLocator.onSuccess.apply(this, [geoLocator.position]);
+            }
         }
 
         // get position when it is not stored in localstorage
@@ -50,6 +53,6 @@ var geoLocator = {
 
 geoLocator.init(function (posObj) {
     console.log(posObj);
-}
-//, null ,true
-);
+}, function (error) {
+    console.log(error);
+}, true);
